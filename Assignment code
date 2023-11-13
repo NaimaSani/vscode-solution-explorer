@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee {
+protected:
+    string name;
+    int employeeID;
+public:
+    Employee(string _name, int _employeeID) : name(_name), employeeID(_employeeID) {}
+
+    virtual void getInfo() {
+        cout << "Name: " << name << endl;
+        cout << "Employee ID: " << employeeID << endl;
+    }
+};
+
+class FullTimeEmployee : virtual public Employee {
+private:
+    double salary;
+public:
+    FullTimeEmployee(string _name, int _employeeID, double _salary) : Employee(_name, _employeeID), salary(_salary) {}
+    
+    void getInfo() override {
+        Employee::getInfo();
+        cout << "Salary: $" << salary << endl;
+    }
+};
+
+class PartTimeEmployee : virtual public Employee {
+private:
+    double hourlyWage;
+    int hoursWorked;
+public:
+    PartTimeEmployee(string _name, int _employeeID, double _hourlyWage, int _hoursWorked) : Employee(_name, _employeeID), hourlyWage(_hourlyWage), hoursWorked(_hoursWorked) {}
+    
+    void getInfo() override {
+        Employee::getInfo();
+        cout << "Hourly Wage: $" << hourlyWage << endl;
+        cout << "Hours Worked: " << hoursWorked << endl;
+    }
+};
+
+int main() {
+    FullTimeEmployee fullTimeEmp("Naima Sani Abubakar", 5867, 9000.0);
+    PartTimeEmployee partTimeEmp("Faiza Sule", 7900, 10.0, 90);
+    
+    fullTimeEmp.getInfo();
+    cout << endl;
+    partTimeEmp.getInfo();
+    
+    return 0;
+}
